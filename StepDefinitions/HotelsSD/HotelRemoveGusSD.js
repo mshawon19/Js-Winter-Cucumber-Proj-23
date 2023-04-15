@@ -1,4 +1,4 @@
-const { Given, Then } = require("@wdio/cucumber-framework");
+const { Given, Then, When } = require("@wdio/cucumber-framework");
 const { expect } = require("chai");
 const HotelHomePage = require("../../Pages/Hotels/HotelHomePage");
 
@@ -9,14 +9,12 @@ Given(/^I am on hotels homepage$/, async function() {
     await browser.pause(1000);
 })
 
-Then(/^I click on Travelers$/, async function() {
+When(/^I click on Travelers$/, async function() {
     await hotelhomepage.clickTravelersBox();
-    await browser.pause(2000);
 })
 
-Then(/^I select “Children” as 2$/, async function() {
+When(/^I select “Children” as 2$/, async function() {
     await hotelhomepage.addChildren(2);
-    await browser.pause(2000)
 })
 
 Then(/^I verify Children-age dropdown are 2$/, async function() {
@@ -38,7 +36,7 @@ Then(/^I verify minus-button is enabled$/, async function() {
 })
 
 //2 children are already added so just need to add 4 more
-Then(/^I select “Children” as 6$/, async function() {
+When(/^I select “Children” as 6$/, async function() {
     await hotelhomepage.addChildren(4);
     await browser.pause(2000);
 })
@@ -70,7 +68,7 @@ Then(/^I verify minus button is enabled$/, async function() {
     expect(isRemoveChildBttnEnable, 'Minus button is NOT enabled').to.be.true;
 })
 
-Then(/^I select “Children” as 5$/, async function() {
+When(/^I select “Children” as 5$/, async function() {
     await hotelhomepage.removeChild(1);
     await browser.pause(2000);
 })
@@ -100,7 +98,7 @@ Then(/^I verify Minus Button is enabled$/, async function() {
     expect(isRemoveChildBttnEnable, 'Minus Button is NOT enabled').to.be.true;
 })
 
-Then(/^I select “Children” as 0$/, async function() {
+When(/^I select “Children” as 0$/, async function() {
     await hotelhomepage.removeChild(5);
     await browser.pause(2000);
 })

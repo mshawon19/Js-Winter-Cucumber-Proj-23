@@ -30,8 +30,9 @@ async clickSignUpBttn() {
 
 async clickTravelersBox() {
     const traverlsBox = await $(this.travelersboxLocator);
+    await traverlsBox.waitForDisplayed(); // or waitForEnabled();
     await traverlsBox.click();
-}
+    }
 
 async add6Adults() {
     const addAdults = await $(this.addAdultsBttnLocator);
@@ -106,6 +107,7 @@ async isChild2DropDownDiplayed() {
 async isChild3DropDownDiplayed() {
     const child3DropDown = await $(this.child3Locator);
     return child3DropDown.isDisplayed();
+    
 }
 
 async isChild4DropDownDiplayed() {
