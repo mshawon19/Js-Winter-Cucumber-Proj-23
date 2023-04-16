@@ -17,3 +17,12 @@ Feature: Sign up
              And I verify "Keep me signed in" checkbox is enabled
              And I verify "Continue" button is displayed
              And I verify "Continue" button is not enabled
+
+    
+    Scenario: Verify Verification message for invalid sign in credentials
+        When I click on SignIn link
+            And I click on SignUp link
+            And I switch window handle to signup page
+            And I enter invalid email Address with as x!@###
+            And I click the Continue button
+        Then I verify error is displayed Enter a valid Email.

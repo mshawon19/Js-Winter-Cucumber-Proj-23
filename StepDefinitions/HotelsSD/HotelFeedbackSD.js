@@ -7,7 +7,7 @@ const HotelHomePage = require("../../Pages/Hotels/HotelHomePage");
 const hotehomepage = new HotelHomePage();
 const hotelfeedbackpage = new HotelFeedBackPage();
 
-Given(/^I am on hotels homepage$/, async function() {
+When(/^I am on hotels homepage$/, async function() {
     await browser.url('/');
     await browser.pause(1000);
 })

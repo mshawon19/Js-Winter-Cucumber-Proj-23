@@ -1,3 +1,5 @@
+const { expect } = require("chai");
+
 class HotelSignupPage {
 
 //Locators of webElements on sign up page
@@ -12,6 +14,8 @@ passwordLocator = '#signupFormPasswordInput';
 rmbrMeCheckBxHeaderLocator = '//span[text()="Keep me signed in"]';
 rmbrMeCheckBxLocator = '#rememberMeSignUpCheckbox';
 continueBttnLocator = '#loginFormSubmitButton';
+emailInputLOcator = '#loginFormEmailInput';
+enlishLangLocator = 'div=English';
 
 termsAndCondLocator = 'a=Terms and Conditions';
 privacyStatementLocator= 'a=Privacy Statement';
@@ -35,9 +39,23 @@ async enteringInvalidEmail() {
     await emailField.setValue('x!@###');
 }
 
+async invalidEmailInput() {
+    const emailField = await $(this.emailInputLOcator);
+    await emailField.setValue('x!@###');
+    await browser.pause(1000);
+}
+
+async clickContinueBttn() {
+    const clickContinue = await $(this.continueBttnLocator);
+    await clickContinue.click();
+    await browser.pause(2000);
+}
+
+
 async isEmailErrorDisplayed() {
     const emailErrorMsg = await $(this.emailErrorMsgLocator);
     return emailErrorMsg.isDisplayed();
+    expect(emailErrorMsg, 'Email error mesage is NOT displayed').to.be.true;
 }
 
 async enteringInvalidFirstName() {

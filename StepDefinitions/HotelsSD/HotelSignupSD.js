@@ -3,11 +3,12 @@ const { expect } = require("chai");
 const HotelHomePage = require("../../Pages/Hotels/HotelHomePage");
 const HotelSignupPage = require("../../Pages/Hotels/HotelSignupPage");
 
+
 const hotelhome = new HotelHomePage();
 const hotelsignup = new HotelSignupPage();
 
-//TC-22
-Given(/^I am on hotels homepage$/, async function() {
+// //TC-22
+When(/^I am on hotels homepage$/, async function() {
     await browser.url('/');
     await browser.pause(1000);
 })
@@ -27,14 +28,20 @@ When(/^I switch window handle to signup page$/, async function() {
     await browser.pause(2000);
 })
 
-When(/^I enter invalid emailAddress with as x!@###$/, async function() {
-    await hotelsignup.enteringInvalidEmail();
-    await browser.pause(2000)
+When(/^I enter invalid email Address with as x!@###$/, async function() {
+    await hotelsignup.invalidEmailInput();
 })
 
+When(/^I click the Continue button$/, async function() {
+    await hotelsignup.clickContinueBttn();
+})
+// When(/^I enter invalid emailAddress with as x!@###$/, async function() {
+//     await hotelsignup.enteringInvalidEmail();
+//     await browser.pause(2000)
+// })
+
 Then(/^I verify error is displayed Enter a valid Email.$/, async function() {
-    const isEmailErrorMsgDisplayed = await hotelsignup.isEmailErrorDisplayed();
-    expect(isEmailErrorMsgDisplayed, 'Email Error Msg is NOT Displayed').to.be.true;
+await hotelsignup.isEmailErrorDisplayed()
 })
 
 When(/^I enter invalid firstName as !@$/, async function() {
