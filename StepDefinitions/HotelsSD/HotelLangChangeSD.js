@@ -1,10 +1,10 @@
-const { When, Then } = require("@wdio/cucumber-framework");
+const { When, Then, Given } = require("@wdio/cucumber-framework");
 const HotelHomePage = require("../../Pages/Hotels/HotelHomePage");
 
 
 const hotelhome = new HotelHomePage();
 
-When(/^I am on hotels homepage$/, async function() {
+Given(/^I am on hotels homepage$/, async function() {
     await browser.url('/');
     await browser.pause(1000);
 });

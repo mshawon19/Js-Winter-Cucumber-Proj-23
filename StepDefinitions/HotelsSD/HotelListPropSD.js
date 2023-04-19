@@ -16,7 +16,7 @@ When(/^I click on List your property$/, async function() {
 })
 
 When(/^I switch window to Property Info$/, async function() {
-    await hotelhome.switchingToPropertyHandle();
+    await hotelhome.switchingToPropertyHandle('https://apps.expediapartnercentral.com/en_US/list?utm_medium=referral&utm_source=HCOM_US-en_US&utm_campaign=HomePage&utm_contentewd=pwa-header-btn&siteId=300000001&tpid=3001&eapid=1&langId=1033')
 })
 
 Then(/^I verify What would you like to list is displayed$/, async function() {
@@ -43,8 +43,8 @@ Then(/^I erify See how much you could earn is displayed$/, async function() {
     await vrbolistpage.isHowMuchYouDisplayed();
 })
 
-When(/^I enter 4 as bedroom$/, async function() {
-    await vrbolistpage.increaseBedrooms(5);
+When(/^I enter (\d+) as bedroom$/, async function(numberOfBedrooms) {
+    await vrbolistpage.increaseBedrooms(numberOfBedrooms);
 })
 
 When(/^I enter 2.5 as bathroom$/, async function() {

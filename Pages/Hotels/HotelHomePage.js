@@ -28,6 +28,8 @@ listYourPropertyLocator = 'div=List your property';
 likeToListLocator = 'p=What would you like to list?';
 lodgingLocator = 'p=Lodging';
 privateResidenceLocator = 'p=Private residence';
+englishLangDisplayLocator = '//option[text()="English (United States)"]'
+españolLangDisplayLocator = '//option[text()="Español (Estados Unidos)"]'
 
 //Functions to interact with webElements on Homepage
 async clickSignInBttn() {
@@ -149,15 +151,15 @@ async isRemoveChildBttnEnabled() {
 
 async selectEspañol() {
     const langDropDown = await $(this.languageBoxLocator);
-    await langDropDown.selectByIndex(1);
+    await langDropDown.selectByVisibleText('Español (Estados Unidos)');
     await browser.pause(2000);
 }
 
 async selectEnglish() {
     const langDropDown = await $(this.languageBoxLocator2);
-    await langDropDown.selectByIndex(0);
-    await browser.pause(2000);
-}
+    await langDropDown.selectByVisibleText('English (United States)');
+    await $(this.englishLangDisplayLocator).waitForDisplayed();
+  }
 
 async clickEnglishLang() {
     const clickEnglish = await $(this.enlishLangLocator);
@@ -199,19 +201,19 @@ async clickListYourProperty() {
     await browser.pause(2000);
 }
 
-async switchingToPropertyHandle() {
-    const connectedHandle =await browser.getWindowHandle();
-
+async switchingToPropertyHandle(url) {
+    const connectedHandle = await browser.getWindowHandle();
+  
     const allHandles = await browser.getWindowHandles();
     for (const handle of allHandles) {
-        await browser.switchToWindow(handle);
-        const currentUrl = await browser.getUrl();
-        console.log(`current url -> ${currentUrl}\n\n`);
-        if (currentUrl.localeCompare('https://apps.expediapartnercentral.com/en_US/list?utm_medium=referral&utm_source=HCOM_US-en_US&utm_campaign=HomePage&utm_contentewd=pwa-header-btn&siteId=300000001&tpid=3001&eapid=1&langId=1033') === 0) {
-            return handle;
-        }
+      await browser.switchToWindow(handle);
+      const currentUrl = await browser.getUrl();
+      console.log(`current url -> ${currentUrl}\n\n`);
+      if (currentUrl.localeCompare(url) === 0) {
+        return handle;
+      }
     }
-}
+  }
 
 async isTextDisplayed() {
     const isLikeToListDisplayed = await $(this.likeToListLocator);
