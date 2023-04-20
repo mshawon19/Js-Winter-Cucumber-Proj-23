@@ -11,7 +11,7 @@ const hotelsignup = new HotelSignupPage();
 const hotelterms = new HotelTermsPage();
 const hotelprivacy = new HotelPrivacyStmtPage();
 
-Given(/^I am on hotels homepage$/, async function() {
+When(/^I am on hotels homepage$/, async function() {
     await browser.url('/');
     await browser.pause(1000);
 })

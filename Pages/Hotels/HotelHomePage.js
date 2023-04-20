@@ -1,3 +1,5 @@
+const { expect } = require("chai");
+
 class HotelHomePage {
 
 //Locators of webElements on Homepage
@@ -16,6 +18,18 @@ traverlers9Locator = 'button=9 travelers, 1 room';
 FeedbackBttnLocator = 'a=Feedback';
 doneBttnLocator = '//button[text()="Done"]';
 removeChildLocator = '//input[contains(@aria-label, "Children Ages")]/preceding-sibling::button';
+enlishLangLocator = 'div=English';
+languageBoxLocator = '//label[text()="Language"]/following-sibling::select';
+saveBttnLocator = 'button=Save';
+españolLangLocator = 'div=Español';
+languageBoxLocator2 = '//label[text()="Idioma"]/following-sibling::select';
+guardarBttnLocator = 'button=Guardar';
+listYourPropertyLocator = 'div=List your property';
+likeToListLocator = 'p=What would you like to list?';
+lodgingLocator = 'p=Lodging';
+privateResidenceLocator = 'p=Private residence';
+englishLangDisplayLocator = '//option[text()="English (United States)"]'
+españolLangDisplayLocator = '//option[text()="Español (Estados Unidos)"]'
 
 //Functions to interact with webElements on Homepage
 async clickSignInBttn() {
@@ -135,6 +149,96 @@ async isRemoveChildBttnEnabled() {
     return removeChildBttn.isEnabled();
 }
 
+async selectEspañol() {
+    const langDropDown = await $(this.languageBoxLocator);
+    await langDropDown.selectByVisibleText('Español (Estados Unidos)');
+    await browser.pause(2000);
+}
+
+async selectEnglish() {
+    const langDropDown = await $(this.languageBoxLocator2);
+    await langDropDown.selectByVisibleText('English (United States)');
+    await $(this.englishLangDisplayLocator).waitForDisplayed();
+  }
+
+async clickEnglishLang() {
+    const clickEnglish = await $(this.enlishLangLocator);
+    await clickEnglish.click();
+    await browser.pause(2000);
+}
+
+async clickSaveBttn() {
+    const saveBttn = await $(this.saveBttnLocator);
+    await saveBttn.click();
+    await browser.pause(2000);
+}
+
+async clickGuardarBttn() {
+    const guardarBttn = await $(this.guardarBttnLocator);
+    await guardarBttn.click();
+    await browser.pause(2000);
+}
+async isEspañolLangDisplayed() {
+    const isEspañolLangDisplaying = await $(this.españolLangLocator);
+    return isEspañolLangDisplaying.isDisplayed()
+    expect(isEspañolLangDisplaying, 'Español is NOT displayed').to.be.true;
+}
+
+async isEnglishLangDisplayed() {
+    const isEnglishLangDisplaying = await $(this.enlishLangLocator);
+    return isEnglishLangDisplaying.isDisplayed()
+    expect(isEnglishLangDisplaying, 'English is NOT displayed').to.be.true;
+}
+async clickEspañolLang() {
+    const clickEspañol = await $(this.españolLangLocator);
+    await clickEspañol.click();
+    await browser.pause(2000);
+}
+
+async clickListYourProperty() {
+    const listYourProperty = await $(this.listYourPropertyLocator);
+    await listYourProperty.click();
+    await browser.pause(2000);
+}
+
+async switchingToPropertyHandle(url) {
+    const connectedHandle = await browser.getWindowHandle();
+  
+    const allHandles = await browser.getWindowHandles();
+    for (const handle of allHandles) {
+      await browser.switchToWindow(handle);
+      const currentUrl = await browser.getUrl();
+      console.log(`current url -> ${currentUrl}\n\n`);
+      if (currentUrl.localeCompare(url) === 0) {
+        return handle;
+      }
+    }
+  }
+
+async isTextDisplayed() {
+    const isLikeToListDisplayed = await $(this.likeToListLocator);
+    return isLikeToListDisplayed.isDisplayed();
+    expect(isLikeToListDisplayed, 'What would you like to list? is NOT displayed').to.be.true;
+}
+
+async isLodgingDispalyed() {
+    const isLodgingDisplayed = await $(this.lodgingLocator);
+    return isLodgingDisplayed.isDisplayed();
+    expect(isLodgingDisplayed, 'Lodging is NOT displayed').to.be.true;
+}
+
+async isPrivateResDisplayed() {
+    const isPrivateResDisplayed = await $(this.privateResidenceLocator);
+    return isPrivateResDisplayed.isDisplayed();
+    expect(isPrivateResDisplayed, 'Private Residence is NOT displayed').to.be.true;
+}
+
+async clickPrivateRes() {
+    const privateRes = await $(this.privateResidenceLocator);
+    await privateRes.click();
+    await browser.pause(2000);
+}
+
 // trying to implement for loop so don't have to keep writing the addChild.click()
 async addChildren(numOfChildren) {
     const addChildBttn = await $(this.addChildLocator);
@@ -151,6 +255,8 @@ async removeChild(numOfChildren) {
         await browser.pause(1000);
     }
 }
+
+
 
 }
 
